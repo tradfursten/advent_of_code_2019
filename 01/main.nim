@@ -1,7 +1,7 @@
 import strutils, os, math, sequtils
 
 proc computeFuel(mass: int): int = 
-  result = int(floor(float(mass) / 3)) - 2
+  result = max(int(floor(float(mass) / 3)) - 2, 0)
 
 proc requiredFuel(m: int): int =
   result = computeFuel(m)
