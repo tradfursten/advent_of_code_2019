@@ -1,6 +1,6 @@
 # Day01
 
-**TODO: Add description**
+Start in mix with `iex -S mix` you can then call `Day01.part1 "input.txt` or `Day01.part2 "input.txt"`. 
 
 ## Installation
 
