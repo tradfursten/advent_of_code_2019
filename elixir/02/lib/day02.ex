@@ -3,7 +3,19 @@ defmodule Day02 do
   Documentation for Day02.
   """
 
-  def run() do
+  def process(program, ip) do
+    op = Enum.at(program, index)
+
+    case compute(op, ip, program) do
+
+    end
+
+
+  end
+
+  def compute(1, ip, program) do
+
+    List.replace_at(program, program[ip+], value)
 
   end
 
