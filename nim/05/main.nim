@@ -37,6 +37,7 @@ proc exec(p:int): int =
     of 4:
       output = A 
       result = p + 2
+      echo output
     of 5:
       if p_A(a_i) != 0: result = p_B(b_i)
       else: result = p + 3
