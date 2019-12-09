@@ -39,7 +39,6 @@ proc countOrbitsAndFindSanta(orbits: Table[string, seq[string]]): tuple[part1: i
     if you[i] == san[i]:
       i.inc
     else: found = true
-
   result = (part1: count, part2: you[i..you.high].len + san[i..san.high].len)
 
 var orbits = readOrbits(paramStr(1))
