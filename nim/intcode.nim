@@ -52,7 +52,7 @@ proc exec(a:var Program) =
       a.p.inc(2)
     of 4:
       a.output.add(A)
-      echo A
+      #echo A
       a.p.inc(2)
     of 5: a.p = if A != 0: B else: a.p + 3
     of 6: a.p = if A == 0: B else: a.p + 3
@@ -83,3 +83,4 @@ proc createProgram*(code: string): Program =
   result.program = code.findAll(re"-?\d+").map(parseInt)
   result.p = 0
   result.relative_base = 0
+  result.status = RUN
