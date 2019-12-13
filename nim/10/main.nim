@@ -1,6 +1,10 @@
 import "../goost"
 import os, strutils, tables, algorithm, math, strformat
 
+proc ang*(a: Vec2): float = 
+  result = arctan2(float(a.y), float(a.x)) + PI/2
+  if result < 0: result += 2 * PI
+
 let unit = (x: 0.0, y: -1.0)
 var astroids = newSeq[Vec2]()
 var 
