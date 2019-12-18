@@ -1,5 +1,5 @@
 import "../goost"
-import os, re, strutils, sequtils, strformat
+import os, re, strutils, sequtils, strformat, math
 
 
 type 
@@ -21,13 +21,36 @@ var steps = paramStr(2).parseInt
 
 for step in 1..steps:
   echo "Step: ", step
+  
   for m1 in 0..moons.high:
     for m2 in (m1+1)..moons.high:
-        let dif_p = (moons[m1].p - moons[m2].p).sgn
-        moons[m1].v -= dif_p
-        moons[m2].v += dif_p
+        let moon1 = moons[m1].p
+        let moon2 = moons[m2].p
+        if moon1.x < moon2.x:
+          moons[m1].v.x.inc
+          moons[m2].v.x.dec
+        elif moon1.x > moon2.x:
+          moons[m1].v.x.dec
+          moons[m2].v.x.inc
+
+        if moon1.y < moon2.y:
+          moons[m1].v.y.inc
+          moons[m2].v.y.dec
+        elif moon1.y > moon2.y:
+          moons[m1].v.y.dec
+          moons[m2].v.y.inc
+
+        if moon1.z < moon2.z:
+          moons[m1].v.z.inc
+          moons[m2].v.z.dec
+        elif moon1.z > moon2.z:
+          moons[m1].v.z.dec
+          moons[m2].v.z.inc
+
+
   for m in 0..moons.high:
-    moons[m].p += moons[m].v
+    let m1 = moons[m]
+    moons[m].p = (x: m1.p.x + m1.v.x, y: m1.p.y + m1.v.y, z: m1.p.z + m1.v.z)
   
   for m in moons:
     echo "pos: ", m.p, ",\tvel: ", m.v

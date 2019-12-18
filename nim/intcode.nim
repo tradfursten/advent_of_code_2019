@@ -49,6 +49,7 @@ proc exec(a:var Program) =
         a.status = PAUS
         return
       A = a.input.pop
+      #echo A
       a.p.inc(2)
     of 4:
       a.output.add(A)
