@@ -13,6 +13,7 @@ template `-`*(a, b: Vec2): Vec2 = (x: a.x - b.x, y: a.y - b.y)
 template `-`*(a, b: Vec3): Vec3 = (x: a.x - b.x, y: a.y - b.y, z: a.z - b.z)
 
 template `*`*(a: Vec2, c: int): Vec2 = (x: a.x * c, y: a.y * c)
+template `+`*(a: Vec2, b: Vec2): Vec2 = (x: a.x + b.x, y: a.y + b.y)
 
 template `+=`*(a:var Vec2, b: Vec2) =
   a.x = a.x + b.x

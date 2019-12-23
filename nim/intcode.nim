@@ -1,12 +1,12 @@
-import strutils, strformat, re, strutils, sequtils, strformat
+import strutils, strformat, re, strutils, sequtils, strformat, deques
 
 type
   Status* = enum RUN, PAUS, HALT, CRASH
   Program* = ref object
     program*: seq[int]
     p: int
-    input*: seq[int]
-    output*: seq[int]
+    input*: Deque[int]
+    output*: Deque[int]
     status*: Status
     relative_base: int
 
@@ -48,11 +48,11 @@ proc exec(a:var Program) =
       if a.input.len == 0:
         a.status = PAUS
         return
-      A = a.input.pop
+      A = a.input.popFirst
       #echo A
       a.p.inc(2)
     of 4:
-      a.output.add(A)
+      a.output.addLast A
       #echo A
       a.p.inc(2)
     of 5: a.p = if A != 0: B else: a.p + 3
@@ -72,15 +72,18 @@ proc exec(a:var Program) =
       a.status = CRASH
       echo fmt"Should not occure op {op} pos {a.p}"
     
-proc runProgram*(a:var Program) =
+proc runProgram*(a:var Program, blocking = false) =
   if a.status == PAUS and a.input.len > 0: a.status = RUN
-  while a.status == RUN:
+  if blocking and a.status == RUN:
     a.exec()
+  else:
+    while a.status == RUN:
+      a.exec()
 
 proc createProgram*(code: string): Program =
   result = Program()
-  result.input = newSeq[int]()
-  result.output = newSeq[int]()
+  result.input = initDeque[int]()
+  result.output = initDeque[int]()
   result.program = code.findAll(re"-?\d+").map(parseInt)
   result.p = 0
   result.relative_base = 0
